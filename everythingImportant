@@ -1,121 +1,125 @@
 using System;
 using System.Net.Mime;
 
-class ConsoleApp1
-{
-    public static void Main(string[] args)
+namespace Hangman{
+
+    class EverythingImportant
     {
-
-        bool wordNotFound = true;
-        string testBigWord = testWordList();
-        Console.WriteLine(testBigWord);
-
-        static void hangedMan()
+        public void bigWinner(){
         {
-            Console.WriteLine(" _____");
-            Console.WriteLine(" |   |");
-            Console.WriteLine(" |  (:c)");
-            Console.WriteLine(" | -----");
-            Console.WriteLine(" |   |");
-            Console.WriteLine(" |  / \\ ");
-            // split 7 lines here ^^ into their own function
-            Console.WriteLine(" |    ");
-            // ^ line here should be repeated for every wrong guess -1
-            Console.WriteLine("--------");
 
-        }
+            bool wordNotFound = true;
+            string testBigWord = testWordList();
+            Console.WriteLine(testBigWord);
 
-
-        bool wordGuess()
-        {
-            string testWord = testBigWord;
-            Console.Write("Guess a word: ");
-            string guess = Console.ReadLine();
-
-            if (guess == testWord)
+            static void hangedMan()
             {
-                Console.WriteLine("Correct!");
-                wordNotFound = false;
-            }
-            else
-            {
-                Console.WriteLine("Wrong.");
+                Console.WriteLine(" _____");
+                Console.WriteLine(" |   |");
+                Console.WriteLine(" |  (:c)");
+                Console.WriteLine(" | -----");
+                Console.WriteLine(" |   |");
+                Console.WriteLine(" |  / \\ ");
+                // split 7 lines here ^^ into their own function
+                Console.WriteLine(" |    ");
+                // ^ line here should be repeated for every wrong guess -1
+                Console.WriteLine("--------");
+
             }
 
-            return wordNotFound;
-        }
 
-        void letterGuess()
-        {
-            Console.Write("Guess a letter: ");
-            string letterGuessA = Console.ReadLine();
-            char letterGuessB = letterGuessA[0];
-
-            string testS = testBigWord;
-            int testLen = testS.Length;
-
-            int numCharInWord = 0;
-
-            for (int i = 0; i < testLen; i++)
+            bool wordGuess()
             {
-                if (letterGuessB == testS[i])
+                string testWord = testBigWord;
+                Console.Write("Guess a word: ");
+                string guess = Console.ReadLine();
+
+                if (guess == testWord)
                 {
-                    numCharInWord = numCharInWord + 1;
-                    // make an array to store positions of chars in later?
+                    Console.WriteLine("Correct!");
+                    wordNotFound = false;
+                }
+                else
+                {
+                    Console.WriteLine("Wrong.");
+                }
+
+                return wordNotFound;
+            }
+
+            void letterGuess()
+            {
+                Console.Write("Guess a letter: ");
+                string letterGuessA = Console.ReadLine();
+                char letterGuessB = letterGuessA[0];
+
+                string testS = testBigWord;
+                int testLen = testS.Length;
+
+                int numCharInWord = 0;
+
+                for (int i = 0; i < testLen; i++)
+                {
+                    if (letterGuessB == testS[i])
+                    {
+                        numCharInWord = numCharInWord + 1;
+                        // make an array to store positions of chars in later?
+                    }
+
+                }
+
+                Console.WriteLine(letterGuessB + " appears " + numCharInWord + " time(s)");
+                gameState();
+            }
+
+            static String testWordList()
+            {
+                string[] wordsList = { "cat", "damnation", "nebula", "ocean", "birthday", "peninsula", "rabbit" };
+                Random testRand = new Random();
+                int wordPickA = testRand.Next(wordsList.Length);
+                string wordPickB = wordsList[wordPickA];
+                return (wordPickB);
+
+                // Random testRand = new Random();
+                // Console.WriteLine(testRand.Next(wordsList.Length));
+            }
+
+            void mainGame()
+            {
+                Console.WriteLine(testBigWord);
+                Console.WriteLine("Would you like to guess a letter? Y/N");
+                string answerA = Console.ReadLine().ToUpper();
+
+                if (answerA == "Y")
+                {
+                    letterGuess();
+                }
+                else if (answerA == "N")
+                {
+                    Console.WriteLine("Would you like to guess a word? Y/N");
+                    string answerB = Console.ReadLine().ToUpper();
+
+                    if (answerB == "Y")
+                        wordGuess();
                 }
 
             }
 
-            Console.WriteLine(letterGuessB + " appears " + numCharInWord + " time(s)");
+            void gameState()
+            {
+                if (wordNotFound = true)
+                {
+                    mainGame();
+                }
+                else
+                {
+                    Console.WriteLine("You win!");
+                }
+            }
             gameState();
-        }
-
-        static String testWordList()
-        {
-            string[] wordsList = { "cat", "damnation", "nebula", "ocean", "birthday", "peninsula", "rabbit" };
-            Random testRand = new Random();
-            int wordPickA = testRand.Next(wordsList.Length);
-            string wordPickB = wordsList[wordPickA];
-            return (wordPickB);
-
-            // Random testRand = new Random();
-            // Console.WriteLine(testRand.Next(wordsList.Length));
-        }
-
-        void mainGame()
-        {
-            Console.WriteLine(testBigWord);
-            Console.WriteLine("Would you like to guess a letter? Y/N");
-            string answerA = Console.ReadLine().ToUpper();
-
-            if (answerA == "Y")
-            {
-                letterGuess();
-            }
-            else if (answerA == "N")
-            {
-                Console.WriteLine("Would you like to guess a word? Y/N");
-                string answerB = Console.ReadLine().ToUpper();
-
-                if (answerB == "Y")
-                    wordGuess();
-            }
 
         }
-
-        void gameState()
-        {
-            if (wordNotFound = true)
-            {
-                mainGame();
-            }
-            else
-            {
-                Console.WriteLine("You win!");
-            }
-        }
-        gameState();
-
-    }
-    
-} 
+        
+    } 
+}
+}
