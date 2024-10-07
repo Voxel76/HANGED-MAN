@@ -1,0 +1,17 @@
+namespace Hangman
+{
+    class program{
+
+        public  static void Main(string[] args){
+
+            WordDataGet wordDataGet = new WordDataGet();
+            wordDataGet.wordlistFinder();
+            wordDataGet.findWord();
+
+
+            EverythingImportant EverythingImportant = new EverythingImportant();
+            EverythingImportant.bigWinner();
+
+        }
+    }
+}
